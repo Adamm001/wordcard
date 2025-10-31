@@ -15,7 +15,13 @@ export default function Flashcards() {
   const [finished, setFinished] = useState(false);
 
   useEffect(() => {
-    fetch("/data.csv")
+    fetch(
+      `${
+        process.env.NODE_ENV === "production"
+          ? "/wordcard/data.csv"
+          : "/data.csv"
+      }`
+    )
       .then((res) => res.text())
       .then((text) => {
         const rows = text
